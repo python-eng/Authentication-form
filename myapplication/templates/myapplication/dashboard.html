@@ -1,0 +1,93 @@
+{% extends 'myapplication/base.html' %}
+{% block css %} 
+<style>
+    th,td{
+        box-sizing: border-box;
+        font-size: .8rem;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+
+
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col-12">S No</th>
+                <th scope="col-12">Email</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last_name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in user %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{i.email}}</td>
+                <td>{{i.first_name}}</td>
+                <td>{{i.last_name}}</td>
+                <td>{{i.Address}}</td>
+                <td>
+                    <!-- <form action="" class="d-inline">
+                        <button id='{{i.id}}' onclick="editDetail(this.id)" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{i.id}}">
+                            Edit
+                          </button> -->
+                          <form action="{% url 'update' i.id %}" method="get" class="d-inline">
+                            {% csrf_token %}
+                            <button class="btn btn-success btn-sm" type="submit">update</button>
+                          </form>
+                          <form action="{% url 'delete' i.id %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button class="btn btn-danger btn-sm" type="submit">delete</button>
+                          </form>
+                          
+            
+  
+                   
+                </td>
+                
+            </tr>
+
+           
+            
+            <div class="modal fade" id="staticBackdrop{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'update' i.id %}" method="post">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                       
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+
+  
+  <!-- Modal -->
+
+
+
+{% endblock content %}

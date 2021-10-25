@@ -1,0 +1,40 @@
+{% extends 'myapplication/base.html' %}
+{% block title %}Udate{% endblock title  %}
+{% block css %}
+<style>
+    .errorlist li{
+        color: red;
+        width: fit-content;
+        list-style: none;
+    }
+    .errorlist{
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    
+</style>
+{% endblock css %}
+{% block content %}
+
+
+
+<div class="update p-5">
+    <div class="container alert alert-success p-5">
+        <div class="alert alert-success shadow">
+            <h5 class="text-center text-dark fw-5">Update Record</h5>
+        </div>
+        <div class="px-5">
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {{form.as_p}}
+                <div class="text-end mt-4">
+                    <button type="submit" class="btn btn-outline-dark">Update Information</button>
+                </div>
+            </form>
+            
+        </div>
+        
+    </div>
+</div>
+{% endblock content %}
